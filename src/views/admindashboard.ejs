@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('background.jpg'); /* Replace with the actual background image if available */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #fff;
+}
+
+.container {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+}
+
+.admin-header {
+    background-color: #4CAF50; /* Green color */
+    padding: 10px;
+    border-radius: 10px 10px 0 0;
+}
+
+.admin-header h1 {
+    font-size: 1.5em;
+}
+
+.create-user-btn {
+    background-color: #FFA000; /* Orange color */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 0;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.create-user-btn:hover {
+    background-color: #FF8C00; /* Darker orange on hover */
+}
+
+.file-list {
+    margin: 20px 0;
+}
+
+.file-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.download-btn {
+    background-color: #4CAF50; /* Green color */
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.download-btn:hover {
+    background-color: #45A049; /* Darker green on hover */
+}
+
+.approve-btn {
+    background-color: #007BFF; /* Blue color */
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.approve-btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.back-btn {
+    background-color: #FF0000; /* Red color */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 0;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.back-btn:hover {
+    background-color: #CC0000; /* Darker red on hover */
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="admin-header">
+            <h1>Admin Dashboard</h1>
+        </header>
+        <main>
+            <button class="create-user-btn"><a href="/users">CREATE ADMIN</a></button>
+            <div class="file-list">
+                <div class="file-item">
+                    <span>File 1</span>
+                    <button class="download-btn">DOWNLOAD</button>
+                    <button class="approve-btn">APPROVE</button>
+                </div>
+                <div class="file-item">
+                    <span>File 2</span>
+                    <button class="download-btn">DOWNLOAD</button>
+                    <button class="approve-btn">APPROVE</button>
+                </div>
+                <div class="file-item">
+                    <span>File 3</span>
+                    <button class="download-btn">DOWNLOAD</button>
+                    <button class="approve-btn">APPROVE</button>
+                </div>
+            </div>
+            <button class="back-btn">BACK</button>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('background.jpg'); /* Replace with the actual background image if available */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #fff;
+}
+
+.container {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+}
+
+header {
+    background-color: #FFA000; /* Orange color */
+    padding: 10px;
+    border-radius: 10px 10px 0 0;
+}
+
+header h1 {
+    font-size: 1.5em;
+}
+
+main {
+    padding: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+textarea,
+.file-input {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1em;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.upload-btn,
+.back-btn {
+    background-color: #FFA000; /* Orange color */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.upload-btn:hover,
+.back-btn:hover {
+    background-color: #FF8C00; /* Darker orange on hover */
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>User Dashboard</h1>
+        </header>
+        <main>
+            <form action="/files" method="post" enctype="multipart/form-data">
+                <label for="title">Title</label>
+                <input type="text" id="title" name="title">
+
+                <label for="description">Description</label>
+                <textarea id="description" name="description"></textarea>
+
+                <label for="clientName">Client Name</label>
+                <input type="text" id="clientName" name="clientName">
+
+                <label for="taglines">Taglines</label>
+                <input type="text" id="taglines" name="taglines">
+
+                <label for="image">Image</label>
+                <input type="file" id="image" name="image" class="file-input" accept="image/*">
+
+                <!-- <label for="psd-file" >PSD File</label>
+                <input type="file" id="psd-file" name="psd-file" class="file-input" accept=".psd"> -->
+
+                <button type="submit" class="upload-btn">Upload</button>
+            </form>
+            <button class="back-btn">Back</button>
+        </main>
+    </div>
+</body>
+</html>
