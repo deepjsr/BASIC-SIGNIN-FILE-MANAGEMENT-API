@@ -36,6 +36,10 @@ const fileSchema = new Schema(
       enum: ["UNAPPROVED", "APPROVED","REJECTED"],
       default: "UNAPPROVED",
     },
+    rejectReason:{
+      type:String,
+      default:"YET TO APPROVE"
+    }
   },
   { timestamps: true }
 );
