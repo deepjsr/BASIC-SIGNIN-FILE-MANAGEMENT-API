@@ -33,13 +33,17 @@ const fileSchema = new Schema(
     },
     status: {
       type: String,
-      enum: ["UNAPPROVED", "APPROVED","REJECTED"],
+      enum: ["UNAPPROVED", "APPROVED", "REJECTED"],
       default: "UNAPPROVED",
     },
-    rejectReason:{
-      type:String,
-      default:"YET TO APPROVE"
-    }
+    rejectReason: {
+      type: String,
+      default: "YET TO APPROVE",
+    },
+    uploadedBy: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+    },
   },
   { timestamps: true }
 );
