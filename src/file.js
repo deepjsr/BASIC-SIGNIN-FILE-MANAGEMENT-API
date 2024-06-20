@@ -39,11 +39,7 @@ const fileSchema = new Schema(
     rejectReason: {
       type: String,
       default: "YET TO APPROVE",
-    },
-    uploadedBy: {
-      type: Schema.Types.ObjectId,
-      ref: "user",
-    },
+    }
   },
   { timestamps: true }
 );

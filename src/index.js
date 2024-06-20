@@ -253,7 +253,7 @@ app.use(
     secret: "Teri34Mehman*0", // Replace with your secret key
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true }, // Set secure to true in production with HTTPS
+    cookie: { secure: false }, // Set secure to true in production with HTTPS
   })
 );
 
@@ -317,7 +317,6 @@ app.post("/login", async (req, res) => {
   const { email, password } = req.body;
   try {
     const check = await User.findOne({ email });
-    console.log(check, "fromdb");
     if (!check) {
       return res.status(401).send("User cannot found");
     } else {
@@ -333,12 +332,12 @@ app.post("/login", async (req, res) => {
         return res.send("Check Password Or Email");
       }
       if (check.role === "ADMIN") {
-       return res.json({ message: userData });
+      //  return res.json({ message: userData });
 
-        // return res.render("admindashboard");
+        return res.render("admindashboard");
       } else {
-        res.json({ message: userData });
-        // return res.render("userdashboard");
+        // res.json({ message: userData });
+        return res.render("userdashboard");
       }
     }
   } catch (error) {
@@ -403,7 +402,7 @@ app.post("/login", async (req, res) => {
 app.post("/files", upload.single("image"), async (req, res) => {
 console.log(req.body,'files');
   const { title, description, clientName, taglines } = req.body;
-
+console.log( req.session.user_id,'session id');
   try {
    const newFile=await File.create({
       title,
