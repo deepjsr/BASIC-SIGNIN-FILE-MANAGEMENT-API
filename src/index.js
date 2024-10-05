@@ -5,33 +5,33 @@ const collection = require("./config");
 const User = require("./config");
 const multer = require("multer");
 const session = require("express-session");
-const cors=require('cors');
+const cors = require("cors");
 const File = require("./file");
 const app = express();
 const PORT = 3000;
 
-
 // Swager UI
-const swaggerUi = require('swagger-ui-express');
-const swaggerJSDoc = require('swagger-jsdoc');
+const swaggerUi = require("swagger-ui-express");
+const swaggerJSDoc = require("swagger-jsdoc");
 
-const options={
-  definition:{
-    openapi:'3.0.0',
-    info:{
-      title:'Node JS API Project for mongodb',
-      version:'1.0.0'
+const options = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Node JS API Project for mongodb",
+      version: "1.0.0",
     },
-    servers:[{
-      url:'http://localhost:3000/'
-    }]
-
+    servers: [
+      {
+        url: "http://localhost:3000/",
+      },
+    ],
   },
-  apis:['index.js']
-}
+  apis: ["index.js"],
+};
 
-const swaggerSpec=swaggerJSDoc(options);
-app.use('/api-docs',swaggerUi.serve,swaggerUi.setup(swaggerSpec));
+const swaggerSpec = swaggerJSDoc(options);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 // Convert into JSON format
 app.use(express.json());
 
@@ -64,7 +64,11 @@ const maxSize = 50 * 1024 * 1024; //file size is 50 mb
 const upload = multer({
   storage: storage,
   fileFilter: (req, file, cb) => {
-    if (file.mimetype == "image/png" || file.mimetype == "image/jpeg" || file.mimetype=="image/jpg") {
+    if (
+      file.mimetype == "image/png" ||
+      file.mimetype == "image/jpeg" ||
+      file.mimetype == "image/jpg"
+    ) {
       file.mimetype = cb(null, true);
     } else {
       cb(null, false);
@@ -74,7 +78,6 @@ const upload = multer({
   limits: { fileSize: maxSize },
 });
 
-
 app.get("/", (req, res) => {
   res.render("login");
 });
@@ -82,7 +85,6 @@ app.get("/", (req, res) => {
 app.get("/signup", (req, res) => {
   res.render("signup");
 });
-
 
 /**
  * @swagger
@@ -118,7 +120,7 @@ app.get("/signup", (req, res) => {
  *           type: string
  *         password:
  *           type: string
- *      
+ *
  */
 
 /**
@@ -137,7 +139,6 @@ app.get("/signup", (req, res) => {
  *               items:
  *                 $ref: '#/components/schemas/user'
  */
-
 
 app.get("/users", async (req, res) => {
   const userData = await User.find({});
@@ -164,10 +165,8 @@ app.get("/users", async (req, res) => {
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/user'
- * 
+ *
  */
-
-
 
 // Route to fetch user by ID
 app.get("/users/:id", async (req, res) => {
@@ -184,10 +183,6 @@ app.get("/users/:id", async (req, res) => {
     res.status(500).send("An error occurred");
   }
 });
-
-
-
-
 
 /**
  * @swagger
@@ -222,7 +217,6 @@ app.get("/users/:id", async (req, res) => {
  *            format: date-time
  */
 
-
 /**
  * @swagger
  * /files:
@@ -244,8 +238,6 @@ app.get("/files", async (req, res) => {
   const allFiles = await File.find({});
   res.send(allFiles);
 });
-
-
 
 // Middleware
 app.use(
@@ -312,7 +304,6 @@ app.post("/signup", async (req, res) => {
  *         description: added successfully
  */
 
-
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -320,7 +311,6 @@ app.post("/login", async (req, res) => {
     if (!check) {
       return res.status(401).send("User cannot found");
     } else {
-      
       // compare password
       const isPasswordMatch = await bcrypt.compare(password, check.password);
 
@@ -332,7 +322,7 @@ app.post("/login", async (req, res) => {
         return res.send("Check Password Or Email");
       }
       if (check.role === "ADMIN") {
-      //  return res.json({ message: userData });
+        //  return res.json({ message: userData });
 
         return res.render("admindashboard");
       } else {
@@ -344,7 +334,6 @@ app.post("/login", async (req, res) => {
     console.log(error);
   }
 });
-
 
 /**
  * @swagger
@@ -361,7 +350,7 @@ app.post("/login", async (req, res) => {
  *           type: string
  *         taglines:
  *           type: string
- *         
+ *
  */
 
 /**
@@ -379,7 +368,7 @@ app.post("/login", async (req, res) => {
  *           type: string
  *         taglines:
  *           type: string
- *         
+ *
  */
 
 /**
@@ -400,11 +389,11 @@ app.post("/login", async (req, res) => {
  */
 
 app.post("/files", upload.single("image"), async (req, res) => {
-console.log(req.body,'files');
+  console.log(req.body, "files");
   const { title, description, clientName, taglines } = req.body;
-console.log( req.session.user_id,'session id');
+  console.log(req.session.user_id, "session id");
   try {
-   const newFile=await File.create({
+    const newFile = await File.create({
       title,
       description,
       clientName,
@@ -414,13 +403,11 @@ console.log( req.session.user_id,'session id');
     });
     const fileDataById = await File.findById(newFile._id);
     return res.status(201).json({ message: fileDataById });
-    
   } catch (err) {
     console.error(err);
     return res.status(500).send(err);
   }
 });
-
 
 /**
  * @swagger
@@ -451,20 +438,18 @@ app.put("/users/:id/make-admin", async (req, res) => {
     const user = await User.findById(_id);
     if (!user) {
       return res.status(404).send("User not found");
-    }else if (user.role=="ADMIN") {
-      return res.send('Already an admin')
+    } else if (user.role == "ADMIN") {
+      return res.send("Already an admin");
     }
-      user.role = "ADMIN";
+    user.role = "ADMIN";
     await user.save();
 
     res.send(`User with ID ${_id} is now an admin`);
-    
   } catch (error) {
     console.error(error);
     res.status(500).send("An error occurred");
   }
 });
-
 
 /**
  * @swagger
@@ -477,8 +462,8 @@ app.put("/users/:id/make-admin", async (req, res) => {
  *           type: string
  *         rejectReason:
  *           type: string
- *         
- *         
+ *
+ *
  */
 
 /**
@@ -509,7 +494,6 @@ app.put("/users/:id/make-admin", async (req, res) => {
  *               $ref: '#/components/schemas/user'
  */
 
-
 // Update file status
 app.put("/file/:id", async (req, res) => {
   console.log(req.body, req.params.id);
@@ -519,8 +503,10 @@ app.put("/file/:id", async (req, res) => {
 
     if (!["UNAPPROVED", "APPROVED", "REJECTED"].includes(updates.status)) {
       return res.status(400).send({ error: "Invalid status value" });
-    }else if (updates.status === 'REJECTED' && !updates.rejectReason) {
-      return res.status(400).send({ error: 'Reject reason is required when status is REJECTED' });
+    } else if (updates.status === "REJECTED" && !updates.rejectReason) {
+      return res
+        .status(400)
+        .send({ error: "Reject reason is required when status is REJECTED" });
     }
     const resource = await File.findByIdAndUpdate(resourceId, updates, {
       new: true,
@@ -560,15 +546,19 @@ app.put("/file/:id", async (req, res) => {
  */
 
 // Delete request
-app.delete('/files/:id', async (req, res) => {
+app.delete("/files/:id", async (req, res) => {
   const file = await File.findOneAndDelete({ _id: req.params.id });
   if (file) {
-    res.status(200).json({ message: 'Deleted successfully' });
+    res.status(200).json({ message: "Deleted successfully" });
   } else {
-    res.status(404).json({ message: 'File not found' });
+    res.status(404).json({ message: "File not found" });
   }
 });
 
 app.listen(PORT, () => {
-  console.log(`Server running on ${PORT}`);
+  console.log(
+    `Server running on http://localhost:` +
+      `${PORT}` +
+      `\n Read Documentation here: http://localhost:3000/api-docs`
+  );
 });
