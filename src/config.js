@@ -1,12 +1,13 @@
-const express=require('express');
+const dotenv = require("dotenv");
+const express = require("express");
 const mongoose = require("mongoose");
-const app=express();
+dotenv.config({ path: "./config.env" });
+
+const app = express();
 mongoose.set("strictQuery", false);
 
-
-
 mongoose
-  .connect("mongodb://localhost:27017/KYC", {
+  .connect(process.env.DATABASE, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -40,5 +41,4 @@ const LoginSchema = new mongoose.Schema(
 // Collection Part
 const User = new mongoose.model("users", LoginSchema);
 
-
-module.exports = User ;
+module.exports = User;

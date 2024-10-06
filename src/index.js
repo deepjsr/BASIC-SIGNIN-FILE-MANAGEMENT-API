@@ -8,7 +8,8 @@ const session = require("express-session");
 const cors = require("cors");
 const File = require("./file");
 const app = express();
-const PORT = 3000;
+const dotenv = require("dotenv");
+dotenv.config({ path: "./config.env" });
 
 // Swager UI
 const swaggerUi = require("swagger-ui-express");
@@ -23,7 +24,7 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:3000/",
+        url: "mongodb+srv://sarmadeepjyoti481:<db_password>@cluster0.55s2nh6.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
       },
     ],
   },
@@ -555,10 +556,12 @@ app.delete("/files/:id", async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
   console.log(
     `Server running on http://localhost:` +
-      `${PORT}` +
+      `${port}` +
       `\n Read Documentation here: http://localhost:3000/api-docs`
   );
 });
