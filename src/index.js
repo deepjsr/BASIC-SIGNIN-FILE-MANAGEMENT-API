@@ -24,7 +24,7 @@ const options = {
     },
     servers: [
       {
-        url: "mongodb+srv://sarmadeepjyoti481:<db_password>@cluster0.55s2nh6.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+        url: process.env.DATABASE,
       },
     ],
   },
@@ -44,7 +44,7 @@ app.use(cors());
 
 // Use EJS as view engine
 app.set("view engine", "ejs");
-app.set("views", path.resolve("../src/views"));
+app.set("views", path.join("../src/views"));
 
 // static file
 app.use(express.static("public"));
@@ -80,7 +80,7 @@ const upload = multer({
 });
 
 app.get("/", (req, res) => {
-  res.render("login.ejs");
+  res.render("login");
 });
 
 app.get("/signup", (req, res) => {
