@@ -9,7 +9,7 @@ const cors = require("cors");
 const File = require("./file");
 const app = express();
 const dotenv = require("dotenv");
-dotenv.config({ path: "./config.env" });
+dotenv.config({ path: "../.config.env" });
 
 // Swager UI
 const swaggerUi = require("swagger-ui-express");
@@ -44,7 +44,7 @@ app.use(cors());
 
 // Use EJS as view engine
 app.set("view engine", "ejs");
-app.set("views", path.resolve("../src/views", "views"));
+app.set("views", path.resolve("../src/views"));
 
 // static file
 app.use(express.static("public"));

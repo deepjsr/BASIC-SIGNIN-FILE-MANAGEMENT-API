@@ -1,7 +1,7 @@
 const dotenv = require("dotenv");
 const express = require("express");
 const mongoose = require("mongoose");
-dotenv.config({ path: "./config.env" });
+dotenv.config({ path: "./.env" });
 
 const app = express();
 mongoose.set("strictQuery", false);
@@ -15,6 +15,7 @@ mongoose
     console.log("MongoDB connected successfully ");
   })
   .catch(() => {
+    console.log("API_KEY:", process.env.DATABASE);
     console.log("Database cannot be conneted");
   });
 // create schema
