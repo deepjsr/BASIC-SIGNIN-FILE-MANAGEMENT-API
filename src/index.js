@@ -44,7 +44,7 @@ app.use(cors());
 
 // Use EJS as view engine
 app.set("view engine", "ejs");
-app.set("views", path.resolve("../src/views"));
+app.set("views", path.resolve("../src/views", "views"));
 
 // static file
 app.use(express.static("public"));
