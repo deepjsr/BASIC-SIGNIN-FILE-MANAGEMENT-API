@@ -80,7 +80,7 @@ const upload = multer({
 });
 
 app.get("/", (req, res) => {
-  res.render("login");
+  res.render("login.ejs");
 });
 
 app.get("/signup", (req, res) => {
